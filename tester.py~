@@ -94,10 +94,7 @@ def increment(rowid=None):
     app.logger.debug('Cursor aquired:\n%s', cursor)
     cursor.execute(RETRIEVE_COUNTER.format(rowid=rowid))
     counter = cursor.fetchone()
-    new_count = int(counter['counter']) + int(counter['increment'])
-    cursor.execute(INCREMENT_COUNTER.format(count=new_count, rowid=rowid))
-    g.db.commit()
-    return json.dumps(dict(counter=new_count))
+    return json.dumps(dict(counter=counter['counter']))
     
     
 

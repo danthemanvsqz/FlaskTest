@@ -1,7 +1,7 @@
 drop table if exists counter;
 
 create table counter (
-    counter int not null,
-    increment int not null
+    counter int not null default 0,
+    increment int not null default 1
 );
     
