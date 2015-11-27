@@ -27,24 +27,24 @@ var change_text = function(new_count, domid) {
 var init_counter = function(response, idx) {
 	counters[idx].rowid = response['rowid'];
 	counters[idx].increment_path = 'http://127.0.0.1:5000/increment/' + response['rowid'];
-	change_text(counters[idx].count, idx); 	
 };
 
 window.onload = function() {
-	ajax_(counters[0].get_counter_path, init_counter, 0);
-	ajax_(counters[1].get_counter_path, init_counter, 1);
-};
+	for (var i = 0; i < counters.length; i++) {
+		change_text(counters[i].start, i);
+		ajax_(counters[i].get_counter_path, init_counter, i);
+	}
+}
 
 setInterval(function() {
 	for (var i = 0; i < counters.length; i++) {
-		if (counters[i].increment_path) {
-			ajax_(counters[i].increment_path,
-				function(response, idx) {
-					change_text(response['counter'], idx);
-				}, i);
-		}
+		ajax_(counters[i].increment_path,
+			function(response, idx) {
+				change_text(response['counter'], idx);
+			}, 
+		i);
 	}
-}, 2000);
+}, 1000);
 
 
 
