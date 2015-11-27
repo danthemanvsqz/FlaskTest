@@ -3,9 +3,8 @@ import logging
 import sqlite3
 import os
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     abort, render_template, flash, jsonify
 from contextlib import closing
-import json
 
 
 # configuration
@@ -85,7 +84,7 @@ def get_counter():
     lastrowid = cursor.lastrowid
     app.logger.debug('lastrowid: %s', lastrowid)
     g.db.commit()
-    return json.dumps(dict(rowid=lastrowid))
+    return jsonify(rowid=lastrowid)
 
 @app.route('/increment/<rowid>')
 def increment(rowid=None):
@@ -97,7 +96,7 @@ def increment(rowid=None):
     new_count = int(counter['counter']) + int(counter['increment'])
     cursor.execute(INCREMENT_COUNTER.format(count=new_count, rowid=rowid))
     g.db.commit()
-    return json.dumps(dict(counter=new_count))
+    return jsonify(counter=new_count)
     
     
 
