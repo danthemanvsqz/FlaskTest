@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Counter</title>
+</head>
+
+<body>
+	<div id="countertable">
+		<table border="1">
+			<tr>
+				<td id="counter1"></td>
+				<td id="counter2"></td>
+			</tr>
+		</table>
+	</div>
+	<script src="static/js/counter.js"></script>
+</body>
+
+</html>
